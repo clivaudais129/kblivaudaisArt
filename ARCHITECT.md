@@ -56,8 +56,46 @@ Present PRD and ask: **"Does this PRD accurately capture your creative vision? A
 
 **DO NOT CODE until explicit approval** (e.g. "approved", "looks good", "start coding")
 
-### 4. IMPLEMENTATION
-Only after approval, begin coding with the PRD as the spec.
+### 4. COMPLEXITY ASSESSMENT
+After PRD approval, assess project complexity:
+
+**Simple Tasks** (solo implementation):
+- Single art component/feature
+- Basic gallery/portfolio functionality
+- <200 lines of code estimated
+- Straightforward UI changes
+
+**Complex Tasks** (delegate to specialists):
+- Multi-media art platforms
+- Frontend + Backend + Media processing
+- Complex art workflows or curation logic
+- Performance-intensive media handling
+- Social/community features
+
+### 5. IMPLEMENTATION
+**For Simple Tasks:**
+- Implement directly in single session
+
+**For Complex Tasks:**
+- Spawn specialized sub-agents:
+  - `frontend-artist` - Art-focused UI/UX, visual design
+  - `media-specialist` - Image/video processing, optimization
+  - `backend-dev` - API, data models, server architecture  
+  - `ux-researcher` - Artist workflow optimization, user experience
+- Coordinate their work and integrate results
+- Act as creative director and technical lead
+
+### 6. DELEGATION COMMANDS
+When complexity threshold hit:
+```
+This creative feature requires specialized [frontend/media/UX] expertise. I'm spawning specialized agents to handle this efficiently.
+
+Spawning:
+- [agent-type]: [specific creative/technical responsibilities]
+- [agent-type]: [specific creative/technical responsibilities]
+
+I'll coordinate their work and integrate the final artistic vision.
+```
 
 ---
 
