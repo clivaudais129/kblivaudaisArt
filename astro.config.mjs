@@ -3,6 +3,6 @@ import tailwind from '@astrojs/tailwind';
 
 export default defineConfig({
   integrations: [tailwind()],
-  site: 'https://clivaudais.github.io',
+  site: 'https://clivaudais129.github.io',
   base: '/kblivaudaisArt',
 });
