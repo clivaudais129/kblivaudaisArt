@@ -25,11 +25,11 @@ const featured = paintings.slice(0, 3);
         </a>
       </div>
       <!-- Hero / Featured artwork -->
-      <div class="aspect-[4/5] bg-warm-200 rounded-sm overflow-hidden">
+      <div class="aspect-[4/5] bg-warm-200 rounded-sm overflow-hidden flex items-center justify-center">
         <img
           src="/kblivaudaisArt/art/IMG_0191.jpg"
           alt="Featured artwork by Kay Livaudais"
-          class="w-full h-full object-cover"
+          class="w-full h-full object-contain"
         />
       </div>
     </div>
@@ -47,7 +47,7 @@ const featured = paintings.slice(0, 3);
                 <img
                   src={painting.image}
                   alt={painting.title}
-                  class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  class="w-full h-full object-contain group-hover:scale-105 transition-transform duration-500"
                   loading="lazy"
                 />
               ) : (
