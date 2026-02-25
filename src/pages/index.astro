@@ -24,9 +24,13 @@ const featured = paintings.slice(0, 3);
           View Gallery
         </a>
       </div>
-      <!-- Hero image placeholder -->
-      <div class="aspect-[4/5] bg-warm-200 flex items-center justify-center rounded-sm overflow-hidden">
-        <p class="text-warm-400 font-serif italic text-lg">Featured artwork</p>
+      <!-- Hero / Featured artwork -->
+      <div class="aspect-[4/5] bg-warm-200 rounded-sm overflow-hidden">
+        <img
+          src="/kblivaudaisArt/art/IMG_0191.jpg"
+          alt="Featured artwork by Kay Livaudais"
+          class="w-full h-full object-cover"
+        />
       </div>
     </div>
   </section>
@@ -38,10 +42,21 @@ const featured = paintings.slice(0, 3);
       <div class="grid md:grid-cols-3 gap-8">
         {featured.map((painting) => (
           <div class="group cursor-pointer">
-            <div class="aspect-square bg-warm-200 rounded-sm overflow-hidden mb-4 flex items-center justify-center">
-              <p class="text-warm-400 font-serif italic text-sm group-hover:text-terracotta transition-colors">
-                {painting.title}
-              </p>
+            <div class="aspect-square bg-warm-200 rounded-sm overflow-hidden mb-4">
+              {painting.image ? (
+                <img
+                  src={painting.image}
+                  alt={painting.title}
+                  class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  loading="lazy"
+                />
+              ) : (
+                <div class="w-full h-full flex items-center justify-center">
+                  <p class="text-warm-400 font-serif italic text-sm group-hover:text-terracotta transition-colors">
+                    {painting.title}
+                  </p>
+                </div>
+              )}
             </div>
             <h3 class="font-serif text-lg text-warm-800 group-hover:text-terracotta transition-colors">{painting.title}</h3>
             <p class="text-warm-400 text-sm mt-1">{painting.medium} · {painting.year}</p>
