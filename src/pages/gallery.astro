@@ -12,35 +12,29 @@ import { paintings } from '../data/paintings';
       </p>
 
       <!-- Gallery Grid -->
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
-        {paintings.map((painting, index) => (
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
+        {paintings.map((painting) => (
           <div
             class="group cursor-pointer"
             data-painting={JSON.stringify(painting)}
             onclick="openLightbox(this)"
           >
-            <div class="aspect-square bg-warm-200 rounded-sm overflow-hidden mb-3 flex items-center justify-center relative">
+            <div class="bg-warm-100 rounded-sm overflow-hidden relative">
               {painting.image ? (
                 <img
                   src={painting.image}
                   alt={painting.title}
-                  class="w-full h-full object-contain group-hover:scale-105 transition-transform duration-500"
+                  class="w-full h-auto block group-hover:scale-105 transition-transform duration-500"
                   loading="lazy"
                 />
               ) : (
-                <div class="absolute inset-0 bg-warm-200 flex items-center justify-center">
-                  <p class="text-warm-400 font-serif italic text-sm group-hover:text-terracotta transition-colors">
-                    {painting.title}
-                  </p>
+                <div class="aspect-square bg-warm-200 flex items-center justify-center">
+                  <p class="text-warm-400 font-serif italic text-sm">{painting.title}</p>
                 </div>
               )}
               <!-- Hover overlay -->
               <div class="absolute inset-0 bg-warm-800/0 group-hover:bg-warm-800/10 transition-colors duration-300" />
             </div>
-            <h3 class="font-serif text-lg text-warm-800 group-hover:text-terracotta transition-colors">{painting.title}</h3>
-            <p class="text-warm-400 text-sm mt-1">
-              {painting.medium} · {painting.dimensions} · {painting.year}
-            </p>
           </div>
         ))}
       </div>
@@ -56,13 +50,9 @@ import { paintings } from '../data/paintings';
     >
       ✕
     </button>
-    <div class="max-w-4xl w-full flex flex-col items-center gap-6" onclick="event.stopPropagation()">
-      <div id="lightbox-image" class="w-full aspect-[4/3] bg-warm-800 rounded-sm flex items-center justify-center">
+    <div class="max-w-5xl w-full flex items-center justify-center" onclick="event.stopPropagation()">
+      <div id="lightbox-image" class="w-full flex items-center justify-center">
         <p class="text-warm-500 font-serif italic">Image placeholder</p>
-      </div>
-      <div class="text-center">
-        <h3 id="lightbox-title" class="font-serif text-2xl text-cream"></h3>
-        <p id="lightbox-details" class="text-cream/60 text-sm mt-2"></p>
       </div>
     </div>
   </div>
@@ -71,13 +61,10 @@ import { paintings } from '../data/paintings';
     function openLightbox(el) {
       const painting = JSON.parse(el.dataset.painting);
       const lightbox = document.getElementById('lightbox');
-      document.getElementById('lightbox-title').textContent = painting.title;
-      document.getElementById('lightbox-details').textContent =
-        `${painting.medium} · ${painting.dimensions} · ${painting.year}`;
 
       const imageContainer = document.getElementById('lightbox-image');
       if (painting.image) {
-        imageContainer.innerHTML = `<img src="${painting.image}" alt="${painting.title}" class="w-full h-full object-contain" />`;
+        imageContainer.innerHTML = `<img src="${painting.image}" alt="${painting.title}" class="max-w-full max-h-[90vh] object-contain" />`;
       } else {
         imageContainer.innerHTML = `<p class="text-warm-500 font-serif italic">${painting.title}</p>`;
       }
