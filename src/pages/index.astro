@@ -1,88 +1,36 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import { paintings } from '../data/paintings';
-
-const featured = paintings.slice(0, 3);
 ---
 
 <BaseLayout title="Home">
-  <!-- Hero Section -->
-  <section class="px-6 md:px-12 lg:px-20 py-16 md:py-24">
-    <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-12 items-center">
-      <div>
-        <h1 class="font-serif text-4xl md:text-5xl lg:text-6xl text-warm-800 leading-tight mb-6">
-          Abstract Paintings by<br />
-          <span class="text-terracotta italic">Kay Livaudais</span>
-        </h1>
-        <p class="text-warm-500 text-lg leading-relaxed mb-8 max-w-lg">
-          Exploring color, texture, and emotion through abstract art. Each painting is a conversation between intention and intuition.
-        </p>
-        <a
-          href="/kblivaudaisArt/gallery/"
-          class="inline-block bg-terracotta text-cream px-8 py-3 text-sm tracking-widest uppercase hover:bg-terracotta-dark transition-colors"
-        >
-          View Gallery
-        </a>
-      </div>
-      <!-- Hero / Featured artwork -->
-      <div class="aspect-[4/5] bg-warm-200 rounded-sm overflow-hidden flex items-center justify-center">
-        <img
-          src="/kblivaudaisArt/art/IMG_0191.jpg"
-          alt="Featured artwork by Kay Livaudais"
-          class="w-full h-full object-contain"
-        />
-      </div>
+  <!-- Full-width Hero with Featured Artwork -->
+  <section class="relative w-full">
+    <div class="w-full max-h-[85vh] overflow-hidden">
+      <img
+        src="/kblivaudaisArt/art/IMG_0191.jpg"
+        alt="Featured artwork by Kay Breaux Livaudais"
+        class="w-full h-auto object-contain"
+      />
     </div>
   </section>
 
-  <!-- Featured Works -->
-  <section class="px-6 md:px-12 lg:px-20 py-16 bg-white/50">
-    <div class="max-w-7xl mx-auto">
-      <h2 class="font-serif text-3xl md:text-4xl text-warm-800 mb-12 text-center">Selected Works</h2>
-      <div class="grid md:grid-cols-3 gap-6">
-        {featured.map((painting) => (
-          <div class="group cursor-pointer">
-            <div class="bg-warm-100 rounded-sm overflow-hidden">
-              {painting.image ? (
-                <img
-                  src={painting.image}
-                  alt={painting.title}
-                  class="w-full h-auto block group-hover:scale-105 transition-transform duration-500"
-                  loading="lazy"
-                />
-              ) : (
-                <div class="aspect-square bg-warm-200 flex items-center justify-center">
-                  <p class="text-warm-400 font-serif italic text-sm">{painting.title}</p>
-                </div>
-              )}
-            </div>
-          </div>
-        ))}
-      </div>
-      <div class="text-center mt-12">
-        <a
-          href="/kblivaudaisArt/gallery/"
-          class="text-terracotta text-sm tracking-widest uppercase hover:text-terracotta-dark transition-colors border-b border-terracotta pb-1"
-        >
-          View All Works →
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <!-- Brief About Teaser -->
-  <section class="px-6 md:px-12 lg:px-20 py-16 md:py-24">
-    <div class="max-w-3xl mx-auto text-center">
-      <h2 class="font-serif text-3xl md:text-4xl text-warm-800 mb-6">The Artist</h2>
-      <p class="text-warm-500 text-lg leading-relaxed mb-8">
-        Kay Livaudais is an abstract painter whose work explores the interplay of color, form, and feeling. Through layers of paint and texture, she invites viewers to find their own meaning in the work.
+  <!-- Artist Name / Tagline -->
+  <section class="py-16 md:py-24 px-6 md:px-12 lg:px-20">
+    <div class="max-w-4xl mx-auto text-center">
+      <h1 class="font-display text-3xl md:text-4xl lg:text-5xl text-warm-800 tracking-wide-3 uppercase font-bold mb-6">
+        Kay Breaux Livaudais
+      </h1>
+      <p class="font-body text-warm-400 text-[15px] leading-[28px] max-w-2xl mx-auto">
+        Exploring color, texture, and emotion through abstract art. Each painting is a conversation between intention and intuition.
       </p>
-      <a
-        href="/kblivaudaisArt/about/"
-        class="text-terracotta text-sm tracking-widest uppercase hover:text-terracotta-dark transition-colors border-b border-terracotta pb-1"
-      >
-        Read More →
-      </a>
+      <div class="mt-10">
+        <a
+          href="/kblivaudaisArt/gallery/"
+          class="inline-block font-heading text-xs tracking-widest uppercase text-white bg-accent px-10 py-3 hover:bg-accent-dark transition-colors font-bold"
+        >
+          View Portfolio
+        </a>
+      </div>
     </div>
   </section>
 </BaseLayout>
