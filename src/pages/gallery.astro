@@ -42,24 +42,24 @@ const irregular = paintings.slice(15);
         ))}
       </div>
 
-      <!-- Irregular shapes - full uncropped, stacked below -->
-      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6 mt-4 md:mt-6">
+      <!-- Irregular shapes - full uncropped, centered in square cells -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 mt-4 md:mt-6">
         {irregular.map((painting) => (
           <div
             class="group cursor-pointer"
             data-painting={JSON.stringify(painting)}
             onclick="openLightbox(this)"
           >
-            <div class="aspect-square bg-warm-100 overflow-hidden relative">
+            <div class="aspect-square bg-warm-100 overflow-hidden relative flex items-center justify-center">
               {painting.image ? (
                 <img
                   src={painting.image}
                   alt={painting.title}
-                  class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  class="max-w-full max-h-full object-contain group-hover:scale-105 transition-transform duration-500"
                   loading="lazy"
                 />
               ) : (
-                <div class="aspect-square flex items-center justify-center">
+                <div class="w-full h-full flex items-center justify-center">
                   <p class="text-warm-400 font-body italic text-sm">{painting.title}</p>
                 </div>
               )}
