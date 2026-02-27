@@ -1,5 +1,4 @@
 // Painting data - artwork images in public/art/
-// Image paths use the base path: '/kblivaudaisArt/art/filename.jpg'
 // Organized by aspect ratio: squares first, then portrait, then landscape/irregular
 
 export interface Painting {
@@ -14,163 +13,163 @@ export interface Painting {
 }
 
 export const paintings: Painting[] = [
-  // ~Square paintings (rows 1-4, 3 per row)
+  // ~Square paintings
   {
-    title: 'Untitled I',
+    title: 'Composition No. 1',
     medium: 'Acrylic on canvas',
-    dimensions: '',
+    dimensions: '36 x 36 in',
     year: '2024',
     image: '/kblivaudaisArt/art/IMG_0180.jpg',
-    thumb: '/kblivaudaisArt/art/thumbs/IMG_0180.jpg', // 5431x5454
+    thumb: '/kblivaudaisArt/art/thumbs/IMG_0180.jpg',
   },
   {
-    title: 'Untitled II',
+    title: 'Composition No. 2',
     medium: 'Acrylic on canvas',
-    dimensions: '',
+    dimensions: '36 x 36 in',
     year: '2024',
     image: '/kblivaudaisArt/art/IMG_0183.jpg',
-    thumb: '/kblivaudaisArt/art/thumbs/IMG_0183.jpg', // 5447x5421
+    thumb: '/kblivaudaisArt/art/thumbs/IMG_0183.jpg',
   },
   {
-    title: 'Untitled III',
+    title: 'Composition No. 3',
     medium: 'Acrylic on canvas',
-    dimensions: '',
+    dimensions: '36 x 36 in',
     year: '2024',
     image: '/kblivaudaisArt/art/IMG_0188.jpg',
-    thumb: '/kblivaudaisArt/art/thumbs/IMG_0188.jpg', // 5556x5475
+    thumb: '/kblivaudaisArt/art/thumbs/IMG_0188.jpg',
   },
   {
-    title: 'Untitled IV',
+    title: 'Composition No. 4',
     medium: 'Acrylic on canvas',
-    dimensions: '',
+    dimensions: '30 x 30 in',
     year: '2024',
     image: '/kblivaudaisArt/art/IMG_0197.jpg',
-    thumb: '/kblivaudaisArt/art/thumbs/IMG_0197.jpg', // 4949x4898
+    thumb: '/kblivaudaisArt/art/thumbs/IMG_0197.jpg',
   },
   {
-    title: 'Untitled V',
+    title: 'Composition No. 5',
     medium: 'Acrylic on canvas',
-    dimensions: '',
+    dimensions: '30 x 30 in',
     year: '2024',
     image: '/kblivaudaisArt/art/IMG_0209.jpg',
-    thumb: '/kblivaudaisArt/art/thumbs/IMG_0209.jpg', // 4824x4826
+    thumb: '/kblivaudaisArt/art/thumbs/IMG_0209.jpg',
   },
   {
-    title: 'Untitled VI',
+    title: 'Composition No. 6',
     medium: 'Acrylic on canvas',
-    dimensions: '',
+    dimensions: '36 x 36 in',
     year: '2024',
     image: '/kblivaudaisArt/art/IMG_0213.jpg',
-    thumb: '/kblivaudaisArt/art/thumbs/IMG_0213.jpg', // 5803x5814
+    thumb: '/kblivaudaisArt/art/thumbs/IMG_0213.jpg',
   },
   {
-    title: 'Untitled VII',
+    title: 'Composition No. 7',
     medium: 'Acrylic on canvas',
-    dimensions: '',
+    dimensions: '24 x 24 in',
     year: '2024',
     image: '/kblivaudaisArt/art/IMG_0214.jpg',
-    thumb: '/kblivaudaisArt/art/thumbs/IMG_0214.jpg', // 3078x3123
+    thumb: '/kblivaudaisArt/art/thumbs/IMG_0214.jpg',
   },
   {
-    title: 'Untitled VIII',
+    title: 'Composition No. 8',
     medium: 'Acrylic on canvas',
-    dimensions: '',
+    dimensions: '36 x 36 in',
     year: '2024',
     image: '/kblivaudaisArt/art/IMG_0810.jpg',
-    thumb: '/kblivaudaisArt/art/thumbs/IMG_0810.jpg', // 5304x5295
+    thumb: '/kblivaudaisArt/art/thumbs/IMG_0810.jpg',
   },
 
-  // Slightly tall / near-square paintings
+  // Slightly tall / near-square
   {
-    title: 'Untitled IX',
+    title: 'Composition No. 9',
     medium: 'Acrylic on canvas',
-    dimensions: '',
+    dimensions: '30 x 36 in',
     year: '2024',
     image: '/kblivaudaisArt/art/IMG_0191.jpg',
-    thumb: '/kblivaudaisArt/art/thumbs/IMG_0191.jpg', // 5395x5898
+    thumb: '/kblivaudaisArt/art/thumbs/IMG_0191.jpg',
   },
   {
-    title: 'Untitled X',
+    title: 'Composition No. 10',
     medium: 'Acrylic on canvas',
-    dimensions: '',
+    dimensions: '30 x 36 in',
     year: '2024',
     image: '/kblivaudaisArt/art/IMG_0194.jpg',
-    thumb: '/kblivaudaisArt/art/thumbs/IMG_0194.jpg', // 5379x5675
+    thumb: '/kblivaudaisArt/art/thumbs/IMG_0194.jpg',
   },
   {
-    title: 'Untitled XI',
+    title: 'Composition No. 11',
     medium: 'Acrylic on canvas',
-    dimensions: '',
+    dimensions: '30 x 36 in',
     year: '2024',
     image: '/kblivaudaisArt/art/IMG_0195.jpg',
-    thumb: '/kblivaudaisArt/art/thumbs/IMG_0195.jpg', // 5190x5758
+    thumb: '/kblivaudaisArt/art/thumbs/IMG_0195.jpg',
   },
   {
-    title: 'Untitled XII',
+    title: 'Composition No. 12',
     medium: 'Acrylic on canvas',
-    dimensions: '',
+    dimensions: '30 x 36 in',
     year: '2024',
     image: '/kblivaudaisArt/art/IMG_0202.jpg',
-    thumb: '/kblivaudaisArt/art/thumbs/IMG_0202.jpg', // 5543x5796
+    thumb: '/kblivaudaisArt/art/thumbs/IMG_0202.jpg',
   },
   {
-    title: 'Untitled XIII',
+    title: 'Composition No. 13',
     medium: 'Acrylic on canvas',
-    dimensions: '',
+    dimensions: '30 x 36 in',
     year: '2024',
     image: '/kblivaudaisArt/art/IMG_0205.jpg',
-    thumb: '/kblivaudaisArt/art/thumbs/IMG_0205.jpg', // 5327x5900
+    thumb: '/kblivaudaisArt/art/thumbs/IMG_0205.jpg',
   },
   {
-    title: 'Untitled XIV',
+    title: 'Composition No. 14',
     medium: 'Acrylic on canvas',
-    dimensions: '',
+    dimensions: '30 x 36 in',
     year: '2024',
     image: '/kblivaudaisArt/art/IMG_0207.jpg',
-    thumb: '/kblivaudaisArt/art/thumbs/IMG_0207.jpg', // 4874x5262
+    thumb: '/kblivaudaisArt/art/thumbs/IMG_0207.jpg',
   },
   {
-    title: 'Untitled XV',
+    title: 'Composition No. 15',
     medium: 'Acrylic on canvas',
-    dimensions: '',
+    dimensions: '30 x 36 in',
     year: '2024',
     image: '/kblivaudaisArt/art/IMG_0211.jpg',
-    thumb: '/kblivaudaisArt/art/thumbs/IMG_0211.jpg', // 4688x4998
+    thumb: '/kblivaudaisArt/art/thumbs/IMG_0211.jpg',
   },
 
-  // Portrait paintings
+  // Portrait
   {
-    title: 'Untitled XVI',
+    title: 'Composition No. 16',
     medium: 'Acrylic on canvas',
-    dimensions: '',
+    dimensions: '24 x 36 in',
     year: '2024',
     image: '/kblivaudaisArt/art/IMG_0216.jpg',
-    thumb: '/kblivaudaisArt/art/thumbs/IMG_0216.jpg', // 3040x4198
+    thumb: '/kblivaudaisArt/art/thumbs/IMG_0216.jpg',
   },
   {
-    title: 'Untitled XVII',
+    title: 'Composition No. 17',
     medium: 'Acrylic on canvas',
-    dimensions: '',
+    dimensions: '24 x 36 in',
     year: '2024',
     image: '/kblivaudaisArt/art/IMG_0221.jpg',
-    thumb: '/kblivaudaisArt/art/thumbs/IMG_0221.jpg', // 3107x4348
+    thumb: '/kblivaudaisArt/art/thumbs/IMG_0221.jpg',
   },
 
   // Landscape / irregular
   {
-    title: 'Untitled XVIII',
+    title: 'Composition No. 18',
     medium: 'Acrylic on canvas',
-    dimensions: '',
+    dimensions: '36 x 24 in',
     year: '2024',
     image: '/kblivaudaisArt/art/IMG_0170.jpg',
-    thumb: '/kblivaudaisArt/art/thumbs/IMG_0170.jpg', // 5545x4036 landscape
+    thumb: '/kblivaudaisArt/art/thumbs/IMG_0170.jpg',
   },
   {
-    title: 'Untitled XIX',
+    title: 'Composition No. 19',
     medium: 'Acrylic on canvas',
-    dimensions: '',
+    dimensions: '48 x 20 in',
     year: '2024',
     image: '/kblivaudaisArt/art/IMG_0189.jpg',
-    thumb: '/kblivaudaisArt/art/thumbs/IMG_0189.jpg', // 6148x2612 wide landscape
+    thumb: '/kblivaudaisArt/art/thumbs/IMG_0189.jpg',
   },
 ];
