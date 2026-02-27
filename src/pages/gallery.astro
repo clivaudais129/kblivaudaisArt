@@ -123,30 +123,32 @@ const irregular = paintings.slice(15);
   </div>
 
   <!-- Paintings data for JS -->
-  <script is:inline define:vars={{ allPaintings: paintings }}>
-    let currentIndex = 0;
+  <script id="paintings-data" type="application/json" set:html={JSON.stringify(paintings)} />
+  <script is:inline>
+    var allPaintings = JSON.parse(document.getElementById('paintings-data').textContent);
+    var currentIndex = 0;
 
     function openLightbox(el) {
       currentIndex = parseInt(el.dataset.index, 10);
       showPainting(currentIndex);
-      const lightbox = document.getElementById('lightbox');
+      var lightbox = document.getElementById('lightbox');
       lightbox.classList.remove('hidden');
       lightbox.classList.add('flex');
       document.body.style.overflow = 'hidden';
     }
 
     function showPainting(idx) {
-      const painting = allPaintings[idx];
-      const imageContainer = document.getElementById('lightbox-image');
+      var painting = allPaintings[idx];
+      var imageContainer = document.getElementById('lightbox-image');
 
       if (painting.image) {
-        imageContainer.innerHTML = `<img src="${painting.image}" alt="${painting.title}" class="max-w-full max-h-[80vh] object-contain" />`;
+        imageContainer.innerHTML = '<img src="' + painting.image + '" alt="' + painting.title + '" class="max-w-full max-h-[80vh] object-contain" />';
       } else {
-        imageContainer.innerHTML = `<p class="text-warm-400 font-body italic">${painting.title}</p>`;
+        imageContainer.innerHTML = '<p class="text-warm-400 font-body italic">' + painting.title + '</p>';
       }
 
       document.getElementById('lb-title').textContent = painting.title;
-      document.getElementById('lb-details').textContent = `${painting.dimensions} · ${painting.medium}`;
+      document.getElementById('lb-details').textContent = painting.dimensions + ' · ' + painting.medium;
     }
 
     function navigateLightbox(dir) {
@@ -156,15 +158,15 @@ const irregular = paintings.slice(15);
 
     function closeLightbox(event, force) {
       if (force || event.target === document.getElementById('lightbox')) {
-        const lightbox = document.getElementById('lightbox');
+        var lightbox = document.getElementById('lightbox');
         lightbox.classList.add('hidden');
         lightbox.classList.remove('flex');
         document.body.style.overflow = '';
       }
     }
 
-    document.addEventListener('keydown', (e) => {
-      const lightbox = document.getElementById('lightbox');
+    document.addEventListener('keydown', function(e) {
+      var lightbox = document.getElementById('lightbox');
       if (lightbox.classList.contains('hidden')) return;
 
       if (e.key === 'Escape') closeLightbox(e, true);
