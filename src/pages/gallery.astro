@@ -3,11 +3,11 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import { paintings } from '../data/paintings';
 ---
 
-<BaseLayout title="Gallery" description="Browse abstract paintings by Kay Livaudais">
+<BaseLayout title="Portfolio" description="Browse abstract paintings by Kay Breaux Livaudais">
   <section class="px-6 md:px-12 lg:px-20 py-12 md:py-16">
     <div class="max-w-7xl mx-auto">
-      <h1 class="font-serif text-4xl md:text-5xl text-warm-800 mb-4">Gallery</h1>
-      <p class="text-warm-500 text-lg mb-12 max-w-2xl">
+      <h1 class="font-heading text-[21px] text-warm-700 mb-4 uppercase tracking-wide-3 font-normal text-center">Portfolio</h1>
+      <p class="text-warm-400 text-[15px] leading-[28px] mb-12 max-w-2xl mx-auto text-center">
         A collection of abstract paintings exploring color, texture, and emotion.
       </p>
 
@@ -19,7 +19,7 @@ import { paintings } from '../data/paintings';
             data-painting={JSON.stringify(painting)}
             onclick="openLightbox(this)"
           >
-            <div class="bg-warm-100 rounded-sm overflow-hidden relative">
+            <div class="bg-warm-100 overflow-hidden relative">
               {painting.image ? (
                 <img
                   src={painting.image}
@@ -29,11 +29,10 @@ import { paintings } from '../data/paintings';
                 />
               ) : (
                 <div class="aspect-square bg-warm-200 flex items-center justify-center">
-                  <p class="text-warm-400 font-serif italic text-sm">{painting.title}</p>
+                  <p class="text-warm-400 font-body italic text-sm">{painting.title}</p>
                 </div>
               )}
-              <!-- Hover overlay -->
-              <div class="absolute inset-0 bg-warm-800/0 group-hover:bg-warm-800/10 transition-colors duration-300" />
+              <div class="absolute inset-0 bg-warm-900/0 group-hover:bg-warm-900/10 transition-colors duration-300" />
             </div>
           </div>
         ))}
@@ -44,7 +43,7 @@ import { paintings } from '../data/paintings';
   <!-- Lightbox Modal -->
   <div id="lightbox" class="fixed inset-0 bg-warm-900/90 z-50 hidden items-center justify-center p-4 md:p-8" onclick="closeLightbox(event)">
     <button
-      class="absolute top-6 right-6 text-cream/80 hover:text-cream text-3xl font-light"
+      class="absolute top-6 right-6 text-white/80 hover:text-white text-3xl font-light"
       onclick="closeLightbox(event, true)"
       aria-label="Close"
     >
@@ -52,7 +51,7 @@ import { paintings } from '../data/paintings';
     </button>
     <div class="max-w-5xl w-full flex items-center justify-center" onclick="event.stopPropagation()">
       <div id="lightbox-image" class="w-full flex items-center justify-center">
-        <p class="text-warm-500 font-serif italic">Image placeholder</p>
+        <p class="text-warm-400 font-body italic">Image placeholder</p>
       </div>
     </div>
   </div>
@@ -66,7 +65,7 @@ import { paintings } from '../data/paintings';
       if (painting.image) {
         imageContainer.innerHTML = `<img src="${painting.image}" alt="${painting.title}" class="max-w-full max-h-[90vh] object-contain" />`;
       } else {
-        imageContainer.innerHTML = `<p class="text-warm-500 font-serif italic">${painting.title}</p>`;
+        imageContainer.innerHTML = `<p class="text-warm-400 font-body italic">${painting.title}</p>`;
       }
 
       lightbox.classList.remove('hidden');
