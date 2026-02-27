@@ -5,6 +5,7 @@ import { paintings } from '../data/paintings';
 // Split paintings into square-ish (first 15) and irregular (last 4)
 const squareish = paintings.slice(0, 15);
 const irregular = paintings.slice(15);
+const paintingsJson = JSON.stringify(paintings);
 ---
 
 <BaseLayout title="Portfolio" description="Browse abstract paintings by Kay Breaux Livaudais">
@@ -16,25 +17,17 @@ const irregular = paintings.slice(15);
       </p>
 
       <!-- Square grid section -->
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
+      <div id="gallery-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
         {squareish.map((painting, i) => (
-          <div
-            class="group cursor-pointer"
-            data-index={i}
-            onclick="openLightbox(this)"
-          >
+          <div class="group cursor-pointer gallery-item" data-index={i}>
             <div class="aspect-square bg-warm-100 overflow-hidden relative">
-              {painting.image ? (
+              {painting.image && (
                 <img
                   src={painting.thumb || painting.image}
                   alt={painting.title}
                   class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                   loading="lazy"
                 />
-              ) : (
-                <div class="w-full h-full flex items-center justify-center">
-                  <p class="text-warm-400 font-body italic text-sm">{painting.title}</p>
-                </div>
               )}
               <div class="absolute inset-0 bg-warm-900/0 group-hover:bg-warm-900/10 transition-colors duration-300" />
             </div>
@@ -47,25 +40,17 @@ const irregular = paintings.slice(15);
       </div>
 
       <!-- Irregular shapes - full uncropped, centered in square cells -->
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 mt-4 md:mt-6">
+      <div id="gallery-grid-irregular" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 mt-4 md:mt-6">
         {irregular.map((painting, i) => (
-          <div
-            class="group cursor-pointer"
-            data-index={squareish.length + i}
-            onclick="openLightbox(this)"
-          >
+          <div class="group cursor-pointer gallery-item" data-index={squareish.length + i}>
             <div class="aspect-square bg-warm-100 overflow-hidden relative flex items-center justify-center">
-              {painting.image ? (
+              {painting.image && (
                 <img
                   src={painting.thumb || painting.image}
                   alt={painting.title}
                   class="max-w-full max-h-full object-contain group-hover:scale-105 transition-transform duration-500"
                   loading="lazy"
                 />
-              ) : (
-                <div class="w-full h-full flex items-center justify-center">
-                  <p class="text-warm-400 font-body italic text-sm">{painting.title}</p>
-                </div>
               )}
               <div class="absolute inset-0 bg-warm-900/0 group-hover:bg-warm-900/10 transition-colors duration-300" />
             </div>
@@ -80,11 +65,11 @@ const irregular = paintings.slice(15);
   </section>
 
   <!-- Lightbox Modal -->
-  <div id="lightbox" class="fixed inset-0 bg-warm-900/90 z-50 hidden items-center justify-center" onclick="closeLightbox(event)">
+  <div id="lightbox" class="fixed inset-0 bg-warm-900/90 z-50 hidden items-center justify-center transition-opacity duration-300 opacity-0">
     <!-- Close button -->
     <button
+      id="lb-close"
       class="absolute top-6 right-6 text-white/80 hover:text-white text-3xl font-light z-10"
-      onclick="closeLightbox(event, true)"
       aria-label="Close"
     >
       ✕
@@ -94,7 +79,6 @@ const irregular = paintings.slice(15);
     <button
       id="lb-prev"
       class="absolute left-4 md:left-8 top-1/2 -translate-y-1/2 text-white/60 hover:text-white text-5xl font-light z-10 select-none"
-      onclick="event.stopPropagation(); navigateLightbox(-1)"
       aria-label="Previous"
     >
       ‹
@@ -104,74 +88,107 @@ const irregular = paintings.slice(15);
     <button
       id="lb-next"
       class="absolute right-4 md:right-8 top-1/2 -translate-y-1/2 text-white/60 hover:text-white text-5xl font-light z-10 select-none"
-      onclick="event.stopPropagation(); navigateLightbox(1)"
       aria-label="Next"
     >
       ›
     </button>
 
     <!-- Image + info -->
-    <div class="flex flex-col items-center max-w-5xl w-full px-16 md:px-24" onclick="event.stopPropagation()">
-      <div id="lightbox-image" class="w-full flex items-center justify-center">
-        <p class="text-warm-400 font-body italic">Image placeholder</p>
-      </div>
-      <div id="lightbox-info" class="mt-4 text-center">
+    <div id="lb-content" class="flex flex-col items-center max-w-5xl w-full px-16 md:px-24">
+      <div id="lightbox-image" class="w-full flex items-center justify-center transition-opacity duration-200"></div>
+      <div class="mt-4 text-center">
         <p id="lb-title" class="font-heading text-sm text-white/90 uppercase tracking-wide-1"></p>
         <p id="lb-details" class="text-white/50 text-xs mt-1"></p>
       </div>
     </div>
   </div>
 
-  <!-- Paintings data for JS -->
-  <script id="paintings-data" type="application/json" set:html={JSON.stringify(paintings)} />
-  <script is:inline>
-    var allPaintings = JSON.parse(document.getElementById('paintings-data').textContent);
-    var currentIndex = 0;
-
-    function openLightbox(el) {
-      currentIndex = parseInt(el.dataset.index, 10);
-      showPainting(currentIndex);
+  <script is:inline define:vars={{ paintingsJson }}>
+    (function() {
+      var allPaintings = JSON.parse(paintingsJson);
+      var currentIndex = 0;
       var lightbox = document.getElementById('lightbox');
-      lightbox.classList.remove('hidden');
-      lightbox.classList.add('flex');
-      document.body.style.overflow = 'hidden';
-    }
-
-    function showPainting(idx) {
-      var painting = allPaintings[idx];
       var imageContainer = document.getElementById('lightbox-image');
+      var lbTitle = document.getElementById('lb-title');
+      var lbDetails = document.getElementById('lb-details');
 
-      if (painting.image) {
-        imageContainer.innerHTML = '<img src="' + painting.image + '" alt="' + painting.title + '" class="max-w-full max-h-[80vh] object-contain" />';
-      } else {
-        imageContainer.innerHTML = '<p class="text-warm-400 font-body italic">' + painting.title + '</p>';
+      function showPainting(idx, fade) {
+        var p = allPaintings[idx];
+        if (fade) {
+          imageContainer.style.opacity = '0';
+          setTimeout(function() {
+            renderImage(p);
+            imageContainer.style.opacity = '1';
+          }, 200);
+        } else {
+          renderImage(p);
+        }
       }
 
-      document.getElementById('lb-title').textContent = painting.title;
-      document.getElementById('lb-details').textContent = painting.dimensions + ' · ' + painting.medium;
-    }
-
-    function navigateLightbox(dir) {
-      currentIndex = (currentIndex + dir + allPaintings.length) % allPaintings.length;
-      showPainting(currentIndex);
-    }
-
-    function closeLightbox(event, force) {
-      if (force || event.target === document.getElementById('lightbox')) {
-        var lightbox = document.getElementById('lightbox');
-        lightbox.classList.add('hidden');
-        lightbox.classList.remove('flex');
-        document.body.style.overflow = '';
+      function renderImage(p) {
+        if (p.image) {
+          imageContainer.innerHTML = '<img src="' + p.image + '" alt="' + p.title + '" class="max-w-full max-h-[80vh] object-contain" />';
+        }
+        lbTitle.textContent = p.title;
+        lbDetails.textContent = p.dimensions + ' \u00B7 ' + p.medium;
       }
-    }
 
-    document.addEventListener('keydown', function(e) {
-      var lightbox = document.getElementById('lightbox');
-      if (lightbox.classList.contains('hidden')) return;
+      function openLB(idx) {
+        currentIndex = idx;
+        showPainting(idx, false);
+        lightbox.classList.remove('hidden');
+        lightbox.classList.add('flex');
+        // Trigger fade-in on next frame
+        requestAnimationFrame(function() {
+          lightbox.style.opacity = '1';
+        });
+        document.body.style.overflow = 'hidden';
+      }
 
-      if (e.key === 'Escape') closeLightbox(e, true);
-      if (e.key === 'ArrowLeft') navigateLightbox(-1);
-      if (e.key === 'ArrowRight') navigateLightbox(1);
-    });
+      function closeLB() {
+        lightbox.style.opacity = '0';
+        setTimeout(function() {
+          lightbox.classList.add('hidden');
+          lightbox.classList.remove('flex');
+          document.body.style.overflow = '';
+        }, 300);
+      }
+
+      function navigate(dir) {
+        currentIndex = (currentIndex + dir + allPaintings.length) % allPaintings.length;
+        showPainting(currentIndex, true);
+      }
+
+      // Event delegation for gallery clicks
+      document.addEventListener('click', function(e) {
+        var item = e.target.closest('.gallery-item');
+        if (item) {
+          var idx = parseInt(item.getAttribute('data-index'), 10);
+          openLB(idx);
+          return;
+        }
+      });
+
+      // Lightbox controls
+      document.getElementById('lb-close').addEventListener('click', closeLB);
+      document.getElementById('lb-prev').addEventListener('click', function(e) { e.stopPropagation(); navigate(-1); });
+      document.getElementById('lb-next').addEventListener('click', function(e) { e.stopPropagation(); navigate(1); });
+
+      // Click on backdrop to close
+      lightbox.addEventListener('click', function(e) {
+        if (e.target === lightbox) closeLB();
+      });
+
+      // Prevent clicks on content from closing
+      document.getElementById('lb-content').addEventListener('click', function(e) { e.stopPropagation(); });
+
+      // Keyboard navigation
+      document.addEventListener('keydown', function(e) {
+        if (lightbox.classList.contains('hidden')) return;
+        if (e.key === 'Escape') closeLB();
+        if (e.key === 'ArrowLeft') navigate(-1);
+        if (e.key === 'ArrowRight') navigate(1);
+      });
+    })();
   </script>
 </BaseLayout>
