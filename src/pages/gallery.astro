@@ -127,7 +127,15 @@ const paintingsJson = JSON.stringify(paintings);
 
       function renderImage(p) {
         if (p.image) {
-          imageContainer.innerHTML = '<img src="' + p.image + '" alt="' + p.title + '" class="max-w-full max-h-[80vh] object-contain" />';
+          imageContainer.innerHTML = '<div class="w-full flex items-center justify-center" style="min-height:60vh"><div class="animate-pulse bg-white/10 rounded" style="width:400px;height:400px;max-width:80vw;max-height:60vh"></div></div>';
+          var img = new Image();
+          img.alt = p.title;
+          img.className = 'max-w-full max-h-[80vh] object-contain';
+          img.onload = function() {
+            imageContainer.innerHTML = '';
+            imageContainer.appendChild(img);
+          };
+          img.src = p.image;
         }
         lbTitle.textContent = p.title;
         lbDetails.textContent = p.dimensions + ' \u00B7 ' + p.medium;
