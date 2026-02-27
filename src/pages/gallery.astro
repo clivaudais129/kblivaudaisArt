@@ -1,6 +1,10 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { paintings } from '../data/paintings';
+
+// Split paintings into square-ish (first 15) and irregular (last 4)
+const squareish = paintings.slice(0, 15);
+const irregular = paintings.slice(15);
 ---
 
 <BaseLayout title="Portfolio" description="Browse abstract paintings by Kay Breaux Livaudais">
@@ -11,24 +15,51 @@ import { paintings } from '../data/paintings';
         A collection of abstract paintings exploring color, texture, and emotion.
       </p>
 
-      <!-- Gallery Grid -->
+      <!-- Square grid section -->
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
-        {paintings.map((painting) => (
+        {squareish.map((painting) => (
           <div
             class="group cursor-pointer"
             data-painting={JSON.stringify(painting)}
             onclick="openLightbox(this)"
           >
-            <div class="bg-warm-100 overflow-hidden relative">
+            <div class="aspect-square bg-warm-100 overflow-hidden relative">
               {painting.image ? (
                 <img
                   src={painting.image}
                   alt={painting.title}
-                  class="w-full h-auto block group-hover:scale-105 transition-transform duration-500"
+                  class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                   loading="lazy"
                 />
               ) : (
-                <div class="aspect-square bg-warm-200 flex items-center justify-center">
+                <div class="w-full h-full flex items-center justify-center">
+                  <p class="text-warm-400 font-body italic text-sm">{painting.title}</p>
+                </div>
+              )}
+              <div class="absolute inset-0 bg-warm-900/0 group-hover:bg-warm-900/10 transition-colors duration-300" />
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <!-- Irregular shapes - full uncropped, centered in square cells -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 mt-4 md:mt-6">
+        {irregular.map((painting) => (
+          <div
+            class="group cursor-pointer"
+            data-painting={JSON.stringify(painting)}
+            onclick="openLightbox(this)"
+          >
+            <div class="aspect-square bg-warm-100 overflow-hidden relative flex items-center justify-center">
+              {painting.image ? (
+                <img
+                  src={painting.image}
+                  alt={painting.title}
+                  class="max-w-full max-h-full object-contain group-hover:scale-105 transition-transform duration-500"
+                  loading="lazy"
+                />
+              ) : (
+                <div class="w-full h-full flex items-center justify-center">
                   <p class="text-warm-400 font-body italic text-sm">{painting.title}</p>
                 </div>
               )}
@@ -40,10 +71,10 @@ import { paintings } from '../data/paintings';
     </div>
   </section>
 
-  <!-- Lightbox Modal -->
+  <!-- Lightbox Modal - shows full uncropped image -->
   <div id="lightbox" class="fixed inset-0 bg-warm-900/90 z-50 hidden items-center justify-center p-4 md:p-8" onclick="closeLightbox(event)">
     <button
-      class="absolute top-6 right-6 text-white/80 hover:text-white text-3xl font-light"
+      class="absolute top-6 right-6 text-white/80 hover:text-white text-3xl font-light z-10"
       onclick="closeLightbox(event, true)"
       aria-label="Close"
     >
