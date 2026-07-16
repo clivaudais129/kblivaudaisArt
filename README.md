@@ -31,5 +31,3 @@ npm run preview  # Preview production build
 ## Deployment
 Configured for GitHub Pages. Set up GitHub Actions or deploy manually with `npm run build` and push the `dist/` folder.
 
-## Contact Form
-Replace `YOUR_FORM_ID` in `src/pages/contact.astro` with your Formspree form ID (free at formspree.io).
